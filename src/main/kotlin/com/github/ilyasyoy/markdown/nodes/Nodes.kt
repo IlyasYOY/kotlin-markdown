@@ -2,10 +2,7 @@ package com.github.ilyasyoy.markdown.nodes
 
 interface MarkdownNode {
     val markdownNodeType: MarkdownNodeType
-}
-
-interface ListMarkdownNode : MarkdownNode {
-    var list: List<ListItemMarkdownNode>
+    fun render(): String
 }
 
 enum class MarkdownNodeType {
@@ -16,6 +13,9 @@ enum class MarkdownNodeType {
     H1, H2, H3, H4, H5, H6,
 
     // Lists
-    UL, OL, LI
+    UL, OL, LI,
+
+    //TEXT
+    TEXT
 }
 

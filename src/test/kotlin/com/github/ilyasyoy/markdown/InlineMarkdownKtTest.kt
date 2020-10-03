@@ -59,6 +59,7 @@ internal class InlineMarkdownKtTest {
         )
     }
 
+    @Test
     fun testImage() {
         val image =
             "https://avatars3.githubusercontent.com/u/18665585?s=460&u=f4668bb4e7de22085ade1fdf0f702a382667e461&v=4"

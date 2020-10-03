@@ -23,3 +23,7 @@ fun Markdown.h5(text: String) {
 fun Markdown.h6(text: String) {
     h(6, text)
 }
+
+fun Markdown.br(times: Int = 0) {
+    this.text(System.lineSeparator().repeat(times))
+}

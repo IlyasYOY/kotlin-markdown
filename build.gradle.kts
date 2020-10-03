@@ -13,12 +13,26 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.3.31")
-    testImplementation(
-        "org.assertj:assertj-core:3.12.2"
-    )
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.2")
+    val junitVersion = "5.7.0"
+    val mockitoVersion = "3.5.13"
+    val assertjVersion = "3.17.2"
+    val kotlinStdLibVersion = "1.3.31"
+
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinStdLibVersion")
+
+    testImplementation(platform("org.junit:junit-bom:$junitVersion"))
+
+    // JUnit Dependencies
+    testImplementation("org.junit.jupiter:junit-jupiter-engine")
+    testImplementation("org.junit.jupiter:junit-jupiter-params")
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+
+    // Mocks
+    testImplementation("org.mockito:mockito-core:$mockitoVersion")
+    testImplementation("org.mockito:mockito-junit-jupiter:$mockitoVersion")
+
+    // Assertions
+    testImplementation("org.assertj:assertj-core:$assertjVersion")
 }
 
 tasks.withType<KotlinCompile> {

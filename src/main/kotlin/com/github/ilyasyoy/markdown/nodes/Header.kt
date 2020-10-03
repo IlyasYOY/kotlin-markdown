@@ -15,4 +15,20 @@ data class HeaderMarkdownNode(
             else -> error("Header number must be >= 0 and ,+ 6")
         }
     }
+
+    override fun render(): String = this.toString()
+
+    override fun toString(): String {
+        val repeatTimes = when (markdownNodeType) {
+            MarkdownNodeType.H1 -> 1
+            MarkdownNodeType.H2 -> 2
+            MarkdownNodeType.H3 -> 3
+            MarkdownNodeType.H4 -> 4
+            MarkdownNodeType.H5 -> 5
+            MarkdownNodeType.H6 -> 6
+            else -> error("Header number must be >= 0 and ,+ 6")
+        }
+
+        return "${"#".repeat(repeatTimes)} $text"
+    }
 }
