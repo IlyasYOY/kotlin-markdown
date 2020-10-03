@@ -1,7 +1,7 @@
 package com.github.ilyasyoy.markdown.nodes
 
 class Markdown : MarkdownNode {
-    private var nodes: List<MarkdownNode> = listOf()
+    var nodes: List<MarkdownNode> = listOf()
 
     override val markdownNodeType: MarkdownNodeType = MarkdownNodeType.MARKDOWN
 
@@ -10,13 +10,6 @@ class Markdown : MarkdownNode {
     fun h(level: Int, text: String) {
         val headerMarkDownNode = HeaderMarkdownNode.ofNumber(level, text)
         nodes = nodes + headerMarkDownNode
-    }
-
-    fun text(text: String) {
-        nodes = nodes + object : MarkdownNode {
-            override val markdownNodeType: MarkdownNodeType = MarkdownNodeType.TEXT
-            override fun render(): String = text
-        }
     }
 
     fun ul(

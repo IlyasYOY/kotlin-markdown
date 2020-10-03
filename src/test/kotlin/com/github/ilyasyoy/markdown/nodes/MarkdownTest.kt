@@ -13,14 +13,16 @@ internal class MarkdownTest {
             text("Hello, this is my first markdown rendered!")
             br()
             h2("Unordered List")
-            ul {
-                li("First Item! Wanna this italic".italic())
-                li("Second Item! Wanna this bold".bold())
+            list {
+                item("First Item! Wanna this italic".italic())
+                item("Second Item! Wanna this bold".bold())
             }
             h2("Ordered List")
-            ol {
-                li("First item!")
+            list(ordered = true) {
+                item("First item!")
             }
+            h2("Code!")
+            code("{ \"hello\": \"world\" }", type = "json")
         }.render()
 
         assertThat(render).isEqualTo(
@@ -32,7 +34,11 @@ internal class MarkdownTest {
             |- _First Item! Wanna this italic_
             |- __Second Item! Wanna this bold__
             |## Ordered List
-            |1. First item!""".trimMargin()
+            |1. First item!
+            |## Code!
+            |```json
+            |{ "hello": "world" }
+            |```""".trimMargin()
         )
     }
 }

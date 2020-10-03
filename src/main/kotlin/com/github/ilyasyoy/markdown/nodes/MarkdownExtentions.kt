@@ -20,6 +20,27 @@ fun Markdown.h5(text: String) {
     h(5, text)
 }
 
+fun Markdown.text(text: String) {
+    nodes = nodes + object : MarkdownNode {
+        override val markdownNodeType: MarkdownNodeType = MarkdownNodeType.TEXT
+        override fun render(): String = text
+    }
+}
+
+fun Markdown.code(text: String, type: String = "") {
+    nodes = nodes + CodeMarkdownNode(type = type, text = text)
+}
+
+
+fun Markdown.list(
+    ordered: Boolean = false,
+    init: CommonListMarkdownNode.() -> Unit
+): CommonListMarkdownNode =
+    when (ordered) {
+        true -> ol(init)
+        false -> ul(init)
+    }
+
 fun Markdown.h6(text: String) {
     h(6, text)
 }

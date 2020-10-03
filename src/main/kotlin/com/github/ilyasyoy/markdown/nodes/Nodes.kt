@@ -16,6 +16,7 @@ enum class MarkdownNodeType {
     UL, OL, LI,
 
     //TEXT
-    TEXT
+    TEXT,
+    CODE
 }
 
