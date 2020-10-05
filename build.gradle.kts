@@ -10,6 +10,7 @@ version = "0.0.1"
 
 repositories {
     mavenCentral()
+    maven("https://jitpack.io")
 }
 
 dependencies {
@@ -19,6 +20,7 @@ dependencies {
     val kotlinStdLibVersion = "1.3.31"
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinStdLibVersion")
+    implementation("com.github.Steppschuh:Java-Markdown-Generator:master")
 
     testImplementation(platform("org.junit:junit-bom:$junitVersion"))
 
