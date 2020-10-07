@@ -3,10 +3,12 @@ package com.github.ilyasyoy.markdown
 import net.steppschuh.markdowngenerator.MarkdownBuilder
 import net.steppschuh.markdowngenerator.MarkdownSerializable
 import net.steppschuh.markdowngenerator.list.TaskListItem
+import net.steppschuh.markdowngenerator.table.Table
+import net.steppschuh.markdowngenerator.table.TableRow
 import net.steppschuh.markdowngenerator.text.TextBuilder
 
 class MarkdownDsl(
-        val contentBuilder: MarkdownBuilder<*, *> = TextBuilder()
+    val contentBuilder: MarkdownBuilder<*, *> = TextBuilder()
 ) {
     fun render() = contentBuilder.toString()
 
@@ -35,10 +37,47 @@ class MarkdownDsl(
     }
 }
 
+class TableDsl(
+    val tableBuilder: Table.Builder
+)
+
+enum class TableAlignment(
+    val value: Int
+) {
+    ALIGN_CENTER(1), ALIGN_LEFT(2), ALIGN_RIGHT(3)
+}
+
+fun TableDsl.rowLimit(limit: Int) {
+    tableBuilder.withRowLimit(limit)
+}
+
+fun TableDsl.alignment(tableAlignment: TableAlignment) {
+    tableBuilder.withAlignment(tableAlignment.value)
+}
+
+fun TableDsl.alignments(vararg tableAlignment: TableAlignment) {
+    tableBuilder.withAlignments(tableAlignment.map { it.value })
+}
+
+fun TableDsl.trimmingIndicator(trimmingIndicator: String) {
+    tableBuilder.withTrimmingIndicator(trimmingIndicator)
+}
+
+fun TableDsl.row(vararg values: String) {
+    val tableRow = TableRow(values.toList())
+    tableBuilder.addRow(tableRow)
+}
+
 fun markdown(applier: MarkdownDsl.() -> Unit): MarkdownDsl {
     val markdownDsl = MarkdownDsl()
     markdownDsl.applier()
     return markdownDsl
+}
+
+fun MarkdownDsl.table(applier: TableDsl.() -> Unit) {
+    val tableDsl = TableDsl(Table.Builder())
+    tableDsl.applier()
+    contentBuilder.append(tableDsl.tableBuilder.build())
 }
 
 fun MarkdownDsl.quote(applier: MarkdownDsl.() -> Unit): MarkdownDsl {
@@ -59,11 +98,13 @@ fun MarkdownDsl.list(applier: MarkdownDsl.() -> Unit): MarkdownDsl {
 
 fun MarkdownDsl.code(language: String? = null, applier: MarkdownDsl.() -> Unit): MarkdownDsl {
     val codeBlockBuilder = language
-            ?.let { contentBuilder.beginCodeBlock(it) }
-            ?: contentBuilder.beginCodeBlock()
+        ?.let { contentBuilder.beginCodeBlock(it) }
+        ?: contentBuilder.beginCodeBlock()
+
     val markdownDsl = MarkdownDsl(codeBlockBuilder)
     markdownDsl.applier()
     contentBuilder.append(codeBlockBuilder)
+
     return markdownDsl
 }
 

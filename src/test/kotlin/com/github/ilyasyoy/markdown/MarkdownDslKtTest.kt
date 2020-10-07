@@ -73,6 +73,20 @@ internal class MarkdownDslKtTest {
                 true to "Do this",
                 false to "Do that"
             )
+
+            subHeading("Table")
+
+            table {
+                rowLimit(5)
+                row("Value", "Square")
+                alignment(TableAlignment.ALIGN_CENTER)
+
+                (1..10)
+                    .withIndex()
+                    .forEach {
+                        row(it.index.toString(), (it.value * it.value).toString())
+                    }
+            }
         }
 
         println(markdown.render())
