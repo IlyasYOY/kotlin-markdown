@@ -71,6 +71,19 @@ markdown {
         true to "Do this",
         false to "Do that"
     )
+
+    subHeading("Table")
+    
+    table {
+        rowLimit(5)
+        alignment(TableAlignment.ALIGN_CENTER)
+        row("Value", "Square")
+        (1..10)
+            .withIndex()
+            .forEach {
+                row(it.index.toString(), (it.value * it.value).toString())
+            }
+    }
 }
 ```
 
@@ -132,6 +145,17 @@ Tasks
 
 - [x] Do this
 - [ ] Do that
+
+Table
+-----
+
+| Value | Square |
+|:-----:|:------:|
+|   0   |   1    |
+|   1   |   4    |
+| ~~~~~ | ~~~~~~ |
+|   8   |   81   |
+|   9   |  100   |
 ```
 
 Rendered MD:
@@ -191,3 +215,13 @@ Tasks
 - [x] Do this
 - [ ] Do that
 
+Table
+-----
+
+| Value | Square |
+|:-----:|:------:|
+|   0   |   1    |
+|   1   |   4    |
+| ~~~~~ | ~~~~~~ |
+|   8   |   81   |
+|   9   |  100   |
