@@ -2,9 +2,15 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.4.10"
-    java
     maven
     `maven-publish`
+}
+
+apply {
+    plugin("kotlin")
+
+    plugin("maven")
+    plugin("maven-publish")
 }
 
 group = "com.github.IlyasYOY"
@@ -49,6 +55,7 @@ tasks {
     }
 
     val sourcesJar by creating(Jar::class) {
+        dependsOn.add("classes")
         archiveClassifier.set("sources")
         from(sourceSets.main.get().allSource)
     }
@@ -62,5 +69,6 @@ tasks {
     artifacts {
         archives(sourcesJar)
         archives(javadocJar)
+        archives(jar)
     }
 }
