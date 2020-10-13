@@ -2,8 +2,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.4.10"
-    application
+    java
     maven
+    `maven-publish`
 }
 
 group = "com.github.IlyasYOY"
@@ -45,11 +46,6 @@ tasks.withType<KotlinCompile> {
 tasks {
     test {
         useJUnitPlatform()
-    }
-
-    wrapper {
-        version = "6.6"
-        distributionType = Wrapper.DistributionType.BIN
     }
 
     val sourcesJar by creating(Jar::class) {
