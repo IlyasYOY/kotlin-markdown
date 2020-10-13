@@ -6,10 +6,6 @@ plugins {
     `maven-publish`
 }
 
-apply(plugin = "kotlin")
-apply(plugin = "maven")
-apply(plugin = "maven-publish")
-
 group = "com.github.IlyasYOY"
 version = "0.0.1"
 
@@ -17,6 +13,10 @@ repositories {
     mavenCentral()
     maven("https://jitpack.io")
 }
+
+apply(plugin = "kotlin")
+apply(plugin = "maven")
+apply(plugin = "maven-publish")
 
 dependencies {
     val junitVersion = "5.7.0"
@@ -67,5 +67,25 @@ tasks {
         archives(sourcesJar)
         archives(javadocJar)
         archives(jar)
+    }
+
+    install {
+        repositories {
+            withConvention(MavenRepositoryHandlerConvention::class) {
+                mavenInstaller {
+                    pom.project {
+                        withGroovyBuilder {
+                            "licenses" {
+                                "license" {
+                                    "name"("The Apache Software License, Version 2.0")
+                                    "url"("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                                    "distribution"("repo")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
