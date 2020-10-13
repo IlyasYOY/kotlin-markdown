@@ -68,6 +68,11 @@ tasks {
         archives(javadocJar)
         archives(jar)
     }
+    
+    wrapper {
+        version = "6.6"
+        distributionType  = Wrapper.DistributionType.BIN
+    }
 
     install {
         repositories {
