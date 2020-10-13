@@ -3,9 +3,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.4.10"
     application
+    maven
 }
 
-group = "com.github.ilyasyoy"
+group = "com.github.IlyasYOY"
 version = "0.0.1"
 
 repositories {

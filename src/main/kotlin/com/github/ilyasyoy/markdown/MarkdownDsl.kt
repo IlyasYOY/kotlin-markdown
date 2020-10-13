@@ -185,7 +185,7 @@ fun MarkdownDsl.link(url: String) {
 }
 
 fun MarkdownDsl.image(text: String, url: String) {
-    contentBuilder.link(text, url)
+    contentBuilder.image(text, url)
 }
 
 fun MarkdownDsl.image(url: String) {
