@@ -46,4 +46,14 @@ tasks {
     test {
         useJUnitPlatform()
     }
+
+    wrapper {
+        version = "6.6"
+        distributionType = Wrapper.DistributionType.BIN
+    }
+
+    kotlinSourcesJar {
+        classifier = "sources"
+        from(sourceSets.main)
+    }
 }
