@@ -1,0 +1,3 @@
+install:
+  - echo "Installing kotlin-markdown"
+  - ./gradlew clean build publishToMavenLocal
