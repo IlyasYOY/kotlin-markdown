@@ -6,12 +6,9 @@ plugins {
     `maven-publish`
 }
 
-apply {
-    plugin("kotlin")
-
-    plugin("maven")
-    plugin("maven-publish")
-}
+apply(plugin = "kotlin")
+apply(plugin = "maven")
+apply(plugin = "maven-publish")
 
 group = "com.github.IlyasYOY"
 version = "0.0.1"
